@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.urls import reverse
-from . import forms
+from .forms import SignUpForm
 
 
 def home(request):
@@ -30,8 +30,19 @@ def logout_user(request):
 
 
 def register_user(request):
-    register_form = forms.SignUpForm()
-    context = {
-        'register_form': register_form
-    }
-    return render(request, 'website/register.html', context)
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Authenticate and login
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, "You Have Successfully Registered! Welcome!")
+            return redirect('home')
+    else:
+        form = SignUpForm()
+        return render(request, 'website/register.html', {'register_form': form})
+
+    return render(request, 'website/register.html', {'register_form': form})
