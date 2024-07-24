@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block content %}
+  <div class="col-md-6 offset-md-3">
+        <h1>Register</h1>
+        <br>
+        <form action="{% url 'home' %}" method="post">
+              {% csrf_token %}
+              {{ register_form }}
+              <button type="submit" class="btn btn-secondary">Login</button>
+        </form>
+	</div>
+{% endblock %}
