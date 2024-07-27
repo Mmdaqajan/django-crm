@@ -88,33 +88,14 @@ def add_customer_record(request):
         return redirect('home')
 
 
-def addd_customer_record(request):
-    add_customer_form = AddRecordForm(request.POST or None)
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            if add_customer_form.is_valid():
-                add_record = add_customer_form.save()
-                messages.success(request, 'Record Added ...')
-                return redirect(reverse('home'))
-    else:
-        messages.success(request, 'You Must Be Logged In !!!')
-    context = {
-        'add_customer_form': add_customer_form,
-    }
-    return render(request, 'website/add_record.html', context)
-
-
 def edit_customer_record(request, pk):
     if request.user.is_authenticated:
         this_record = Record.objects.get(id=pk)
         form = AddRecordForm(request.POST or None, instance=this_record)
-        context = {
-            'this_record': this_record,
-            'form': form,
-            'first_name': this_record.first_name,
-            'last_name': this_record.last_name,
-            'email': this_record.email,
-            'phone': this_record.phone,
-            'address': this_record.address,
-        }
-        return render(request, 'website/edit_redord.html', context)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Record Has Been Updated!')
+            return redirect('home')
+        return render(request, 'website/edit_record.html', {'form': form, 'this_record': this_record})
+    else:
+        return redirect('home')
