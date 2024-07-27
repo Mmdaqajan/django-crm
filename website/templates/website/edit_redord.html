@@ -1,0 +1,29 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+	Add Record Page
+{% endblock %}
+
+{% block content %}
+ <div class="col-md-6 offset-md-3">
+        <h1>Add Record</h1>
+        <br>
+        <form action="{% url 'edit_record' this_record.id %}" method="post" class="">
+              {% csrf_token %}
+
+            {{ form.first_name }}
+            <br>
+            {{ form.last_name }}
+            <br>
+            {{ form.email }}
+            <br>
+            {{ form.phone }}
+            <br>
+            {{ form.address }}
+
+              <br>
+              <button type="submit" class="btn btn-secondary">Add</button>
+        </form>
+    </div>
+
+{% endblock %}

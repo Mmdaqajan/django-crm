@@ -10,3 +10,15 @@ https://getbootstrap.com/docs/5.3/getting-started/introduction/
 
 https://getbootstrap.com/docs/5.3/components/navbar/
 
+https://getbootstrap.com/docs/5.3/content/tables/
+
+
+باید توی فرم
+action="{% url 'add_record' %}"
+که اطلاعات رو بفرستد به خود صفحههههههههههههههه
+
+
+
+        form = AddRecordForm(request.POST or None, instance=this_record)
+وقتی میخای توی جنگو فرمت رو ادیت کنی
+میتوانی یک اینستنس بهش پاس بدهی

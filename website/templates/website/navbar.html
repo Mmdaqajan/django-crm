@@ -28,7 +28,11 @@
 {#          <a class="nav-link disabled" aria-disabled="true">Disabled</a>#}
 {#        </li>#}
       {% if user.is_authenticated %}
+          <li class="nav-item">
+              <a href="{% url 'add_record' %}" class="nav-link">Add Record</a>
+          </li>
           </ul>
+
       	<form class="d-flex" method="post" action="{% url 'logout' %}">
           {% csrf_token %}
     {#        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
@@ -43,8 +47,9 @@
               <a href="{% url 'register' %}" class="nav-link">Register</a>
           </li>
           </ul>
-          
+
       {% endif %}
+
     </div>
   </div>
 </nav>

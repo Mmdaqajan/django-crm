@@ -1,0 +1,41 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+	{{ record.first_name.capitalize }} {{ record.last_name.capitalize }}'s Page
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    {{ record.first_name.capitalize }}  -  {{ record.last_name.capitalize }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"> <strong>ID: </strong>
+    {{ record.id }}
+    </h5>
+      
+    <hr>
+      
+    <h5 class="card-title"> <strong>Email: </strong>
+    {{ record.email }}
+
+    </h5>
+      
+      <hr>
+    <h5 class="card-title"> <strong>Phone: </strong>
+    {{ record.phone }}
+
+    </h5>
+      
+    <hr>
+      
+    <h5 class="card-title"> <strong>Created Date: </strong>
+    {{ record.created_at }}
+    </h5>
+      
+  </div>
+</div>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'edit_record' pk=record.id %}" class="btn btn-secondary">Edit</a>
+    <a href="{% url 'delete_record' pk=record.id %}" class="btn btn-danger">Delete</a>
+{% endblock %}
